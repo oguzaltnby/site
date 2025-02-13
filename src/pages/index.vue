@@ -213,9 +213,8 @@ export default Vue.extend({
             </h1> -->
 
             <h1
-              class="font-semibold text-center text-lg text-black/50 dark:text-white/50 md:text-xl"
+              class="md:(text-xl text-left) font-semibold text-center text-lg text-black/50 dark:text-white/50 md:text-xl mt-3 md:mt-0"
             >
-              Hi, I am
               <span
                 class="text-black/60 select-none dark:text-white/60 transition-colors bg-zinc-200 dark:bg-zinc-800 rounded-full align-middle py-2.5 pl-3 pr-4 gap-1 inline-flex items-center w-max font-medium"
               >
