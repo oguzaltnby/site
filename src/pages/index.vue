@@ -207,10 +207,26 @@ export default Vue.extend({
         <div class="space-y-8">
           <div class="lg:space-y-4">
             <Status class="mt-4 flex justify-center md:justify-start" />
-            <h1 class="font-semibold text-center text-lg md:(text-xl text-left) text-black/50 dark:text-white/50  mt-3 md:mt-0">
+            <!-- <h1 class="font-semibold text-center text-lg md:(text-xl text-left) text-black/50 dark:text-white/50  mt-3 md:mt-0">
               Oğuzhan
               <span class="text-black/90 dark:text-white/90">ALTUNBEY</span>
+            </h1> -->
+
+            <h1
+              class="font-semibold text-center text-lg text-black/50 dark:text-white/50 md:text-xl"
+            >
+              Hi, I am
+              <span
+                class="text-black/60 select-none dark:text-white/60 transition-colors bg-zinc-200 dark:bg-zinc-800 rounded-full align-middle py-2.5 pl-3 pr-4 gap-1 inline-flex items-center w-max font-medium"
+              >
+                <SmartImage
+                  src="/assets/icons/gir-photoaidcom-cropped-min.png"
+                  class="object-cover h-7 w-7"
+                />
+                oguzhan</span
+              >
             </h1>
+
 
             <h1
               class="font-semibold text-center text-4xl md:(text-6xl text-left) text-black/90 leading-normal dark:text-white/90">
