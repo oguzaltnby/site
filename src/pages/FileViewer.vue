@@ -54,7 +54,10 @@
       v-if="showPasswordModal"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
     >
-      <div class=" card-base  p-6 rounded-lg max-w-sm w-full shadow-lg border blurred-background">
+      <div
+        class="card-base p-6 rounded-lg max-w-sm w-full shadow-lg border"
+        :style="blurredBackgroundStyle"
+      >
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 text-center">
           Protected File
         </h3>
@@ -96,7 +99,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: "Dosya Listesi",
+      title: "Files",
     };
   },
   data() {
@@ -106,10 +109,22 @@ export default Vue.extend({
       showPasswordModal: false,
       currentProtectedFile: "",
       enteredPassword: "",
+      isDarkMode: false,
     };
   },
   created() {
     this.fetchFiles();
+  },
+  mounted() {
+    this.isDarkMode = document.documentElement.classList.contains('dark');
+  },
+  computed: {
+    blurredBackgroundStyle() {
+      return {
+        backdropFilter: 'blur(10px)',
+        backgroundColor: this.isDarkMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.3)',
+      };
+    },
   },
   methods: {
     async fetchFiles() {
@@ -181,9 +196,5 @@ export default Vue.extend({
 }
 .handle:active {
   cursor: grabbing;
-}
-.blurred-background {
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.3); /* Arka plan rengini ve opaklığını ayarlayın */
 }
 </style>
