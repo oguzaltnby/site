@@ -4,7 +4,6 @@
     :description="['Buradan dosyaları görüntüleyip indirebilirsiniz.']"
     class="space-y-6"
   >
-    <!-- Grid düzen: geniş ekranlarda 4 sütun, küçük ekranlarda 1 sütun -->
     <draggable
       v-model="files"
       group="files"
@@ -16,9 +15,7 @@
       handle=".handle"
     >
       <div v-for="file in files" :key="file" class="handle">
-        <!-- Row şeklinde tasarlanmış kart -->
         <div class="rounded-lg card-base p-2 flex flex-row items-center h-14">
-          <!-- İkon Bölümü -->
           <div class="rounded-lg p-2 flex items-center justify-center mr-4">
             <img
               :src="getFileIcon(file)"
@@ -26,12 +23,10 @@
               alt="Dosya İkonu"
             />
           </div>
-          <!-- Dosya Bilgileri -->
           <div class="flex flex-row items-center justify-between w-full">
             <p class="text-gray-700 dark:text-gray-300 text-sm font-medium truncate">
               {{ file }}
             </p>
-            <!-- Eğer dosya şifre korumalıysa custom modal tetiklenir -->
             <template v-if="!requiresPassword(file)">
               <a
                 :href="`/.netlify/functions/downloadFile?filename=${file}`"
@@ -55,31 +50,35 @@
       </div>
     </draggable>
 
-    <!-- Custom Şifre Modalı -->
     <div
       v-if="showPasswordModal"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
     >
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-sm w-full">
-        <h3 class="text-lg font-medium mb-4">Şifre Giriniz</h3>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-sm w-full shadow-lg border dark:border-gray-700">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 text-center">
+          Şifre Gerekiyor
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
+          Bu dosyayı indirmek için lütfen şifrenizi girin.
+        </p>
         <input
           type="password"
           v-model="enteredPassword"
-          class="border p-2 mb-4 w-full rounded"
+          class="border border-gray-300 dark:border-gray-600 p-3 mb-4 w-full rounded-lg text-sm focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
           placeholder="Şifre"
         />
-        <div class="flex justify-end space-x-4">
-          <button
-            @click="submitPassword"
-            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Gönder
-          </button>
+        <div class="flex justify-between mt-4">
           <button
             @click="closePasswordModal"
-            class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+            class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition"
           >
             İptal
+          </button>
+          <button
+            @click="submitPassword"
+            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+          >
+            Gönder
           </button>
         </div>
       </div>
@@ -103,8 +102,6 @@ export default Vue.extend({
   data() {
     return {
       files: [] as string[],
-      pageLoaded: false,
-      // Şifre korumalı dosyalar için varsayılan şifre (gereksinime göre değiştirebilirsiniz)
       protectedPassword: "secret",
       showPasswordModal: false,
       currentProtectedFile: "",
@@ -124,37 +121,22 @@ export default Vue.extend({
         console.error("Dosya listesi alınamadı:", error);
       }
     },
-    onDragEnd(event: any) {
-      // Drag işlemi tamamlandığında yapılacaklar (gerektiğinde)
-    },
     getFileIcon(filename: string) {
       const extension = filename.split(".").pop()?.toLowerCase() || "default";
       const icons: Record<string, string> = {
         pdf: "https://img.icons8.com/?size=100&id=zGrV8SMoAvHE&format=png&color=000000",
         doc: "https://img.icons8.com/?size=100&id=pGHcje298xSl&format=png&color=000000",
-        docx: "https://img.icons8.com/?size=100&id=pGHcje298xSl&format=png&color=000000",
         xls: "https://img.icons8.com/?size=100&id=117561&format=png&color=000000",
-        xlsx: "https://img.icons8.com/?size=100&id=117561&format=png&color=000000",
-        ppt: "https://img.icons8.com/?size=100&id=ifP93G7BXUhU&format=png&color=000000",
-        pptx: "https://img.icons8.com/?size=100&id=ifP93G7BXUhU&format=png&color=000000",
         jpg: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
-        jpeg: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
         png: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
-        gif: "https://img.icons8.com/?size=100&id=5oUGM6NBLyWf&format=png&color=000000",
-        txt: "https://img.icons8.com/?size=100&id=50nDvbuc0xFF&format=png&color=000000",
         zip: "https://img.icons8.com/?size=100&id=PLvn50bVGAlA&format=png&color=000000",
-        rar: "https://img.icons8.com/?size=100&id=PLvn50bVGAlA&format=png&color=000000",
-        mp3: "https://img.icons8.com/?size=100&id=p6vT9rfwUGw6&format=png&color=000000",
-        mp4: "https://img.icons8.com/?size=100&id=1FE2HGszFS4w&format=png&color=000000",
         default: "https://cdn.jsdelivr.net/gh/lucide-icons/lucide/icons/file.svg",
       };
       return icons[extension] || icons.default;
     },
-    // Dosya adında ünlem işareti varsa şifre gerektir
     requiresPassword(file: string): boolean {
       return file.includes("!");
     },
-    // Şifre modalını açar ve hangi dosya için şifre gerektiğini belirler
     openPasswordModal(file: string) {
       this.currentProtectedFile = file;
       this.enteredPassword = "";
@@ -162,13 +144,9 @@ export default Vue.extend({
     },
     closePasswordModal() {
       this.showPasswordModal = false;
-      this.currentProtectedFile = "";
-      this.enteredPassword = "";
     },
-    // Girilen şifreyi kontrol eder ve doğruysa dosya indirmeyi başlatır
     submitPassword() {
       if (this.enteredPassword === this.protectedPassword) {
-        // Doğru şifre: dosya indirme URL'sine yönlendiriyoruz.
         window.location.href = `/.netlify/functions/downloadFile?filename=${this.currentProtectedFile}&password=${encodeURIComponent(
           this.enteredPassword
         )}`;
@@ -177,9 +155,9 @@ export default Vue.extend({
         alert("Hatalı şifre!");
       }
     },
-  },
-  mounted() {
-    this.pageLoaded = true;
+    onDragEnd() {
+      console.log("Drag ended");
+    },
   },
 });
 </script>
