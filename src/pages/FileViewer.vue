@@ -1,7 +1,7 @@
 <template>
   <PageLayout
-    title="Dosya Listesi"
-    :description="['Buradan dosyaları görüntüleyip indirebilirsiniz.']"
+    title="Files"
+    :description="['You can view and download files from here']"
     class="space-y-6"
   >
     <draggable
@@ -54,31 +54,31 @@
       v-if="showPasswordModal"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
     >
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-sm w-full shadow-lg border dark:border-gray-700">
+      <div class=" card-base dark:bg-gray-800 p-6 rounded-lg max-w-sm w-full shadow-lg border ">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 text-center">
-          Şifre Gerekiyor
+          Protected File
         </h3>
         <p class="text-sm text-gray-600 dark:text-gray-400 text-center mb-4">
-          Bu dosyayı indirmek için lütfen şifrenizi girin.
+          Password Required
         </p>
         <input
           type="password"
           v-model="enteredPassword"
           class="border border-gray-300 dark:border-gray-600 p-3 mb-4 w-full rounded-lg text-sm focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          placeholder="Şifre"
+          placeholder="Password"
         />
         <div class="flex justify-between mt-4">
           <button
             @click="closePasswordModal"
             class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition"
           >
-            İptal
+            Cancel
           </button>
           <button
             @click="submitPassword"
             class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
           >
-            Gönder
+            Submit
           </button>
         </div>
       </div>

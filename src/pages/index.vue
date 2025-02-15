@@ -39,7 +39,7 @@ export default Vue.extend({
           {
             title: "Kumport Port Services Inc.",
             url: "https://kumport.com.tr",
-            position: "Information Technologies Intern",
+            position: "IT Intern",
             date: "2023-2024",
           },
 
@@ -48,7 +48,7 @@ export default Vue.extend({
           {
             title: "Borusan Asım Kocabıyık Vocational and Technical Anatolian High School",
             url: "https://borusan.meb.k12.tr",
-            position: "Information Technologies",
+            position: "Informatics",
             date: "2020-2024",
           },
           {
