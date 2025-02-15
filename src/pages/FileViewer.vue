@@ -126,10 +126,20 @@ export default Vue.extend({
       const icons: Record<string, string> = {
         pdf: "https://img.icons8.com/?size=100&id=zGrV8SMoAvHE&format=png&color=000000",
         doc: "https://img.icons8.com/?size=100&id=pGHcje298xSl&format=png&color=000000",
+        docx: "https://img.icons8.com/?size=100&id=pGHcje298xSl&format=png&color=000000",
         xls: "https://img.icons8.com/?size=100&id=117561&format=png&color=000000",
+        xlsx: "https://img.icons8.com/?size=100&id=117561&format=png&color=000000",
+        ppt: "https://img.icons8.com/?size=100&id=ifP93G7BXUhU&format=png&color=000000",
+        pptx: "https://img.icons8.com/?size=100&id=ifP93G7BXUhU&format=png&color=000000",
         jpg: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
+        jpeg: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
         png: "https://img.icons8.com/?size=100&id=13917&format=png&color=000000",
+        gif: "https://img.icons8.com/?size=100&id=5oUGM6NBLyWf&format=png&color=000000",
+        txt: "https://img.icons8.com/?size=100&id=50nDvbuc0xFF&format=png&color=000000",
         zip: "https://img.icons8.com/?size=100&id=PLvn50bVGAlA&format=png&color=000000",
+        rar: "https://img.icons8.com/?size=100&id=PLvn50bVGAlA&format=png&color=000000",
+        mp3: "https://img.icons8.com/?size=100&id=p6vT9rfwUGw6&format=png&color=000000",
+        mp4: "https://img.icons8.com/?size=100&id=1FE2HGszFS4w&format=png&color=000000",
         default: "https://cdn.jsdelivr.net/gh/lucide-icons/lucide/icons/file.svg",
       };
       return icons[extension] || icons.default;
