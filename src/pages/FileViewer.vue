@@ -54,8 +54,8 @@
       v-if="showPasswordModal"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
     >
-    <div class="relative card-base p-6 rounded-lg max-w-sm w-full shadow-lg border bg-white/30 dark:bg-black/30 before:absolute before:inset-0 before:backdrop-blur-md before:-z-10">
-
+    <div class="card-base p-6 rounded-lg max-w-sm w-full shadow-lg border bg-white/30 dark:bg-black/30 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/30 filter blur-lg z-[-1]"></div>
 
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 text-center">
           Protected File
