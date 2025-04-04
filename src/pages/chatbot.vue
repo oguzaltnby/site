@@ -22,7 +22,7 @@ const sendMessage = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer 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`
+      "Authorization": `Bearer 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`
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
