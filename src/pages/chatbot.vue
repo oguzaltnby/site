@@ -22,7 +22,7 @@ const sendMessage = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+      "Authorization": `Bearer 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`
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
