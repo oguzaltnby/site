@@ -6,63 +6,61 @@
     <input
       v-model="userInput"
       @keyup.enter="sendMessage"
-      placeholder="Bir mesaj yaz..."
+      placeholder="Mesajınızı yazın..."
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const userInput = ref('')
-const messages = ref([{ role: 'bot', content: 'Merhaba! Size nasıl yardımcı olabilirim?' }])
+import { ref } from "vue";
+const messages = ref([
+  { role: "bot", content: "Merhaba! Size nasıl yardımcı olabilirim?" },
+]);
+const userInput = ref("");
 
 const sendMessage = async () => {
-  if (!userInput.value.trim()) return
+  if (!userInput.value) return;
 
-  messages.value.push({ role: 'user', content: userInput.value })
+  messages.value.push({ role: "user", content: userInput.value });
 
-  const res = await $fetch('/api/chat', {
-    method: 'POST',
-    body: {
-      messages: [
-        { role: 'system', content: 'Sen kullanıcıyla sohbet eden bir asistansın.' },
-        ...messages.value.map(msg => ({
-          role: msg.role === 'bot' ? 'assistant' : 'user',
-          content: msg.content
-        }))
-      ]
-    }
-  })
+  const { data, error } = await useFetch("/api/chat", {
+    method: "POST",
+    body: { message: userInput.value },
+  });
 
-  messages.value.push({ role: 'bot', content: res.choices[0].message.content })
-  userInput.value = ''
-}
+  if (error.value) {
+    messages.value.push({ role: "bot", content: "Bir hata oluştu!" });
+  } else {
+    messages.value.push({ role: "bot", content: data.value.reply });
+  }
+
+  userInput.value = "";
+};
 </script>
 
 <style scoped>
 .chat-container {
-  width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: sans-serif;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .bot {
-  background: #e2ffe2;
-  padding: 8px;
-  border-radius: 6px;
-  margin: 6px 0;
+  background: #f1f1f1;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 .user {
   background: #cce5ff;
-  padding: 8px;
-  border-radius: 6px;
-  margin: 6px 0;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
   text-align: right;
 }
 input {
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   margin-top: 10px;
 }
 </style>
