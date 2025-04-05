@@ -95,3 +95,6 @@ sw.*
 # Others
 .yarn
 .netlify
+
+echo ".env" >> .gitignore
+

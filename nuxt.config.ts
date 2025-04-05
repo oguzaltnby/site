@@ -47,6 +47,7 @@ const Config: NuxtConfig = {
   plugins,
   publicRuntimeConfig,
 
+
   hooks: {
     generate: {
       fallback: true,

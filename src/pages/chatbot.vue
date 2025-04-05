@@ -9,6 +9,7 @@
 
 <script setup>
 import { ref } from "vue";
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 const messages = ref([{ role: "bot", content: "Merhaba! Size nasıl yardımcı olabilirim?" }]);
 const userInput = ref("");
@@ -22,7 +23,7 @@ const sendMessage = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer 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`
+      "Authorization": `Bearer ${apiKey}`
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
