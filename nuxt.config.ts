@@ -23,6 +23,7 @@ import feed from "./config/modules/feed"
 const isDev = process.env.NODE_ENV === "development"
 
 const Config: NuxtConfig = {
+
   // Constant options
   rootDir: "./",
   srcDir: "src",
@@ -47,6 +48,10 @@ const Config: NuxtConfig = {
   plugins,
   publicRuntimeConfig,
 
+  runtimeConfig: {
+    openaiApiKey: process.env.OPENAI_API_KEY,
+    public: {}
+  },
 
   hooks: {
     generate: {
@@ -63,5 +68,6 @@ const Config: NuxtConfig = {
   vite,
   feed,
 }
+
 
 export default Config
