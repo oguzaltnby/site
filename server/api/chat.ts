@@ -8,14 +8,15 @@ export default defineEventHandler(async (event) => {
       Authorization: `Bearer ${config.openaiApiKey}`,
       "Content-Type": "application/json"
     },
-    body: {
+    body: JSON.stringify({
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "Sen kullanıcıyla sohbet eden bir asistansın." },
         ...body.messages
       ]
-    }
+    })
   });
 
-  return res;
+  const data = await res.json();
+  return data;
 });
