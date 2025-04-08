@@ -52,6 +52,15 @@ const Config: NuxtConfig = {
     openaiApiKey: process.env.OPENAI_API_KEY,
     public: {}
   },
+  build: {},
+
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['ofetch']
+      }
+    }
+  },
 
   hooks: {
     generate: {
