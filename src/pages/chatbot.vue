@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { $fetch } from 'ofetch'
+import $fetch from 'ohmyfetch'
 
 // Kullanıcının mesajı
 const userInput = ref("")
