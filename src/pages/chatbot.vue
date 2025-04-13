@@ -1,96 +1,78 @@
 <template>
-  <div class="chat-container">
-    <div
-      v-for="(message, index) in messages"
-      :key="index"
-      :class="['message', message.role]"
-    >
-      {{ message.content }}
+  <section class="chatbot">
+    <div class="messages">
+      <div v-for="(msg, i) in messages" :key="i" class="message">
+        <strong>{{ msg.role === 'user' ? 'Sen' : 'Bot' }}:</strong> {{ msg.content }}
+      </div>
     </div>
-    <input
-      v-model="userInput"
-      @keyup.enter="sendMessage"
-      placeholder="Mesajınızı yazın..."
-    />
-  </div>
+    <form @submit.prevent="sendMessage" class="form">
+      <input
+        v-model="input"
+        type="text"
+        placeholder="Mesajını yaz..."
+        class="input"
+      />
+      <button type="submit" class="button">Gönder</button>
+    </form>
+  </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
-import $fetch from 'ohmyfetch'
+import { $fetch } from 'ofetch'
 
-// Kullanıcının mesajı
-const userInput = ref("")
+const input = ref('')
+const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
 
-// Mesaj geçmişi
-const messages = ref([
-  { role: "assistant", content: "Merhaba! Size nasıl yardımcı olabilirim?" }
-])
-
-// Mesaj gönderme işlevi
 const sendMessage = async () => {
-  if (!userInput.value.trim()) return
+  if (!input.value.trim()) return
 
-  // Kullanıcı mesajını ekle
-  messages.value.push({ role: "user", content: userInput.value })
+  const userMessage: { role: 'user' | 'assistant'; content: string } = { role: 'user', content: input.value }
+  messages.value.push(userMessage)
 
-  // API isteği gönder
-  try {
-    const response = await $fetch('/api/chat', {
-      method: 'POST',
-      body: {
-        messages: messages.value
-      }
-    })
+  const response = await $fetch('/api/chat', {
+    method: 'POST',
+    body: { messages: messages.value },
+  })
 
-    // Cevabı ekle
-    const reply = response.choices?.[0]?.message?.content || "Bir hata oluştu."
-    messages.value.push({ role: "assistant", content: reply })
-
-  } catch (error) {
-    messages.value.push({ role: "assistant", content: "Hata: Sunucuya ulaşılamıyor." })
-  }
-
-  // Giriş kutusunu temizle
-  userInput.value = ""
+  messages.value.push({ role: 'assistant', content: response.text })
+  input.value = ''
 }
 </script>
 
 <style scoped>
-.chat-container {
+.chatbot {
   max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: sans-serif;
+  margin: 0 auto;
+  padding: 2rem;
 }
-
+.messages {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
 .message {
-  padding: 10px 15px;
-  border-radius: 10px;
-  margin: 6px 0;
-  max-width: 80%;
-  word-break: break-word;
+  margin-bottom: 0.5rem;
 }
-
-.user {
-  background-color: #cce5ff;
-  align-self: flex-end;
-  text-align: right;
-  margin-left: auto;
+.form {
+  display: flex;
 }
-
-.assistant {
-  background-color: #f1f1f1;
-  align-self: flex-start;
-  margin-right: auto;
+.input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
 }
-
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  border-radius: 6px;
+.button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #10b981;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
