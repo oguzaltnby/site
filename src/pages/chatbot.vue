@@ -1,10 +1,17 @@
-<!-- pages/chat.vue -->
 <template>
   <div class="chat-container">
-    <div v-for="(message, index) in messages" :key="index" :class="message.role">
+    <div
+      v-for="(message, index) in messages"
+      :key="index"
+      :class="['message', message.role]"
+    >
       {{ message.content }}
     </div>
-    <input v-model="userInput" @keyup.enter="sendMessage" placeholder="Mesajınızı yazın..." />
+    <input
+      v-model="userInput"
+      @keyup.enter="sendMessage"
+      placeholder="Mesajınızı yazın..."
+    />
   </div>
 </template>
 
@@ -12,46 +19,78 @@
 import { ref } from 'vue'
 import { $fetch } from 'ofetch'
 
+// Kullanıcının mesajı
 const userInput = ref("")
-const messages = ref([{ role: "bot", content: "Merhaba! Size nasıl yardımcı olabilirim?" }])
 
+// Mesaj geçmişi
+const messages = ref([
+  { role: "assistant", content: "Merhaba! Size nasıl yardımcı olabilirim?" }
+])
+
+// Mesaj gönderme işlevi
 const sendMessage = async () => {
-  if (!userInput.value) return
+  if (!userInput.value.trim()) return
 
+  // Kullanıcı mesajını ekle
   messages.value.push({ role: "user", content: userInput.value })
 
-  const { choices } = await $fetch('/api/chat', {
-    method: 'POST',
-    body: { messages: messages.value }
-  })
+  // API isteği gönder
+  try {
+    const response = await $fetch('/api/chat', {
+      method: 'POST',
+      body: {
+        messages: messages.value
+      }
+    })
 
-  messages.value.push({ role: "bot", content: choices[0].message.content })
+    // Cevabı ekle
+    const reply = response.choices?.[0]?.message?.content || "Bir hata oluştu."
+    messages.value.push({ role: "assistant", content: reply })
+
+  } catch (error) {
+    messages.value.push({ role: "assistant", content: "Hata: Sunucuya ulaşılamıyor." })
+  }
+
+  // Giriş kutusunu temizle
   userInput.value = ""
 }
 </script>
 
 <style scoped>
 .chat-container {
-  max-width: 500px;
-  margin: auto;
+  max-width: 600px;
+  margin: 40px auto;
   padding: 20px;
+  font-family: sans-serif;
 }
-.bot {
-  background: #eee;
-  padding: 10px;
+
+.message {
+  padding: 10px 15px;
   border-radius: 10px;
-  margin: 5px 0;
+  margin: 6px 0;
+  max-width: 80%;
+  word-break: break-word;
 }
+
 .user {
-  background: #cce5ff;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 5px 0;
+  background-color: #cce5ff;
+  align-self: flex-end;
   text-align: right;
+  margin-left: auto;
 }
+
+.assistant {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+  margin-right: auto;
+}
+
 input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
   margin-top: 10px;
+  border-radius: 6px;
 }
 </style>
