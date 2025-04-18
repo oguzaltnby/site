@@ -11,6 +11,7 @@ import loading from "./config/loading"
 import modules from "./config/modules"
 import plugins from "./config/plugins"
 import publicRuntimeConfig from "./config/publicRuntimeConfig"
+import path from "path";
 
 // Specific module options
 import viteOptions from "./config/modules/vite"
@@ -56,8 +57,9 @@ const Config: NuxtConfig = {
   generate,
   css,
   modules: [
+    "@nuxt/content",
     ...modules,
-    feed,
+    path.resolve(__dirname, "./config/modules/feed"),
   ],
   plugins,
   publicRuntimeConfig,
