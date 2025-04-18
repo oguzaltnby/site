@@ -1,50 +1,51 @@
-const Feed = () => {
-  const baseUrlArticles = "oguzaltnby.com/blog"
+import type { FeedOptions } from "@nuxtjs/feed"
 
-  const feedFormats = {
-    rss: { type: "rss2", file: "rss.xml" },
-    json: { type: "json1", file: "feed.json" },
-  }
+const baseUrl = process.env.NODE_ENV === "production"
+  ? "https://oguzaltnby.com"
+  : "http://localhost:3000"
 
+const baseUrlArticles = `${baseUrl}/blog`
+
+const feedFormats = {
+  rss: { type: "rss2", file: "rss.xml" },
+  json: { type: "json1", file: "feed.json" },
+}
+
+const createFeedArticles = async (feed: any) => {
   const { $content } = require("@nuxt/content")
 
-  const createFeedArticles = async function (feed: any) {
-    feed.options = {
-      title: "Oguzhan's Blog",
-      link: baseUrlArticles,
-    }
-
-    const articles = await $content("blog").fetch()
-
-    articles.forEach((article: any) => {
-      const url = `${baseUrlArticles}/${article.slug}`
-
-      const hostName =
-        process.env.NODE_ENV === "production"
-          ? "https://oguzaltnby.com"
-          : "http://localhost:3000"
-
-      const postImagesPath = `${hostName}/assets/images/posts`
-
-      feed.addItem({
-        title: article.title,
-        slug: article.slug,
-        link: url,
-        image: article.image
-          ? `${hostName}${article.image}`
-          : `${postImagesPath}/${url?.split("/")?.at(-1)}.jpg`,
-        date: new Date(article.createdAt),
-        description: article.description,
-        content: article.summary,
-      })
-    })
+  feed.options = {
+    title: "Oguzhan's Blog",
+    link: baseUrlArticles,
+    description: "Oguzhan'ın blog yazıları",
   }
 
-  return Object.values(feedFormats).map(({ file, type }) => ({
-    path: `${file}`,
-    create: createFeedArticles,
-    type,
-  }))
+  const articles = await $content("blog").sortBy("createdAt", "desc").fetch()
+
+  articles.forEach((article: any) => {
+    const url = `${baseUrlArticles}/${article.slug}`
+    const postImage = article.image
+      ? `${baseUrl}${article.image}`
+      : `${baseUrl}/assets/images/posts/${article.slug}.jpg`
+
+    feed.addItem({
+      title: article.title,
+      link: url,
+      description: article.description,
+      content: article.summary,
+      date: new Date(article.createdAt),
+      // customElements ile custom alan eklenebilir:
+      customElements: [
+        { 'image': postImage },
+      ]
+    })
+  })
 }
+
+const Feed: FeedOptions[] = Object.values(feedFormats).map(({ file, type }) => ({
+  path: file,
+  type,
+  create: createFeedArticles,
+}))
 
 export default Feed
