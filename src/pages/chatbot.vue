@@ -27,8 +27,7 @@ const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
 const sendMessage = async () => {
   if (!input.value.trim()) return
 
-  const userMessage: { role: 'user' | 'assistant'; content: string } = { role: 'user', content: input.value }
-  messages.value.push(userMessage)
+  messages.value.push({ role: 'user', content: input.value })
 
   const response = await $fetch('/api/chat', {
     method: 'POST',
@@ -48,6 +47,7 @@ const sendMessage = async () => {
 }
 .messages {
   background: #1e1e1e;
+  color: white;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;

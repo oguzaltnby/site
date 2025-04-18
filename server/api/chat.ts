@@ -1,4 +1,3 @@
-// server/api/chat.ts
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const body = await readBody(event);
@@ -19,5 +18,7 @@ export default defineEventHandler(async (event) => {
   });
 
   const data = await res.json();
-  return data;
+  return {
+    text: data.choices[0].message.content
+  };
 });

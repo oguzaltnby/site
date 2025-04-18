@@ -13,51 +13,27 @@ import plugins from "./config/plugins"
 import publicRuntimeConfig from "./config/publicRuntimeConfig"
 
 // Specific module options
-import vite from "./config/modules/vite"
+import viteOptions from "./config/modules/vite"
 import feed from "./config/modules/feed"
-
-// Hooks
-// import { generateDone } from "./hooks/generate/done"
 
 // Constants
 const isDev = process.env.NODE_ENV === "development"
 
 const Config: NuxtConfig = {
-
-  // Constant options
   rootDir: "./",
   srcDir: "src",
   target: "static",
-
-  /*
-    Disabling server-side rendering on development mode because
-    Vite module currently doesn't work when SSR is enabled. This
-    might cause some issues and/or hydration errors but will be
-    effective enough to help you develop easier.
-  */
   ssr: !isDev,
-
-  // Imported options
-  head,
-  loading,
-  buildModules,
-  components,
-  generate,
-  css,
-  modules,
-  plugins,
-  publicRuntimeConfig,
 
   runtimeConfig: {
     openaiApiKey: process.env.OPENAI_API_KEY,
     public: {}
   },
-  build: {},
 
   vite: {
     build: {
       rollupOptions: {
-        external: ['ofetch']
+        external: ["ofetch"]
       }
     }
   },
@@ -73,10 +49,21 @@ const Config: NuxtConfig = {
     },
   },
 
-  // Modules
-  vite,
-  feed,
-}
+  head,
+  loading,
+  buildModules,
+  components,
+  generate,
+  css,
+  modules: [
+    ...modules,
+    feed,
+  ],
+  plugins,
+  publicRuntimeConfig,
 
+  // Vite modül ayarları
+  vite: viteOptions,
+}
 
 export default Config
