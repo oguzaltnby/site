@@ -19,7 +19,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ofetch as $fetch } from 'ofetch';
+import { ofetch } from 'ofetch'
+
+const $fetch = ofetch
 
 const input = ref('')
 const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])

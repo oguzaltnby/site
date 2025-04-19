@@ -33,6 +33,7 @@ const Config: NuxtConfig = {
 
   vite: {
     build: {
+      transpile: ['ofetch'],
       rollupOptions: {
         external: ["ofetch"]
       }
