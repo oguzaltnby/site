@@ -61,6 +61,7 @@ const Config: NuxtConfig = {
     ...modules,
     "@nuxtjs/feed"
   ],
+  feed,
   plugins,
   publicRuntimeConfig,
 
