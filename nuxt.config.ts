@@ -59,7 +59,7 @@ const Config: NuxtConfig = {
   modules: [
     "@nuxt/content",
     ...modules,
-    path.resolve(__dirname, "./config/modules/feed"),
+    "@nuxtjs/feed"
   ],
   plugins,
   publicRuntimeConfig,
