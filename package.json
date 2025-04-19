@@ -88,8 +88,9 @@
     "postcss-preset-env": "^7.8.3",
     "prettier": "^2.8.8",
     "sass": "^1.78.0",
-    "sass-loader": "^10.4.1",
+    "sass-loader": "^10.5.2",
     "vite": "^3.2.10",
-    "webpack": "^4.46.0"
+    "webpack": "^5.99.6",
+    "webpack-cli": "^4.10.0"
   }
 }
