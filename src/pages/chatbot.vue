@@ -11,8 +11,11 @@
         type="text"
         placeholder="Mesajını yaz..."
         class="input"
+        :disabled="loading"
       />
-      <button type="submit" class="button">Gönder</button>
+      <button type="submit" class="button" :disabled="loading">
+        {{ loading ? 'Gönderiliyor...' : 'Gönder' }}
+      </button>
     </form>
   </section>
 </template>
@@ -25,19 +28,35 @@ const $fetch = ofetch
 
 const input = ref('')
 const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
+const loading = ref(false)
 
 const sendMessage = async () => {
-  if (!input.value.trim()) return
+  const text = input.value.trim()
+  if (!text || loading.value) return
 
-  messages.value.push({ role: 'user', content: input.value })
-
-  const response = await $fetch('/api/chat', {
-    method: 'POST',
-    body: { messages: messages.value },
-  })
-
-  messages.value.push({ role: 'assistant', content: response.text })
+  messages.value.push({ role: 'user', content: text })
   input.value = ''
+  loading.value = true
+
+  try {
+    const response = await $fetch('/api/chat', {
+      method: 'POST',
+      body: { messages: messages.value },
+    })
+
+    messages.value.push({
+      role: 'assistant',
+      content: response.text || '🤖 Boş bir yanıt geldi.',
+    })
+  } catch (error: any) {
+    messages.value.push({
+      role: 'assistant',
+      content: '❌ Bir hata oluştu. Lütfen tekrar deneyin.',
+    })
+    console.error('API Hatası:', error)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -76,5 +95,9 @@ const sendMessage = async () => {
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+.button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
 }
 </style>
