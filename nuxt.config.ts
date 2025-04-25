@@ -11,8 +11,10 @@ import loading from "./config/loading"
 import modules from "./config/modules"
 import plugins from "./config/plugins"
 import publicRuntimeConfig from "./config/publicRuntimeConfig"
+
+// Specific module options
+import viteOptions from "./config/modules/vite"
 import feed from "./config/modules/feed"
-import path from "path"
 
 // Constants
 const isDev = process.env.NODE_ENV === "development"
@@ -22,13 +24,6 @@ const Config: NuxtConfig = {
   srcDir: "src",
   target: "static",
   ssr: !isDev,
-
-  // Webpack 5'i aktif hale getiriyoruz
-  build: {
-    transpile: ['ofetch'],
-    // Webpack 5 kullanımı burada etkinleştiriliyor
-    webpack5: true,
-  },
 
   runtimeConfig: {
     openaiApiKey: process.env.OPENAI_API_KEY,
@@ -57,6 +52,13 @@ const Config: NuxtConfig = {
   feed,
   plugins,
   publicRuntimeConfig,
+
+  vite: {
+    ...viteOptions,
+    optimizeDeps: {
+      include: ["ofetch"]
+    }
+  }
 }
 
 export default Config
