@@ -47,7 +47,7 @@ const Config: NuxtConfig = {
   modules: [
     "@nuxt/content",
     // ...modules,
-    "@nuxtjs/feed"
+
   ],
   content: {
     markdown: {
