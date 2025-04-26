@@ -13,21 +13,11 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "#imports": [".nuxt/imports.d.ts"]
     },
     "types": [
-      "@types/node",
-      /* Nuxt types */
-      "@nuxt/types",
-      "@nuxt/content",
-      "@nuxtjs/firebase",
-      "@nuxtjs/axios",
-      "@nuxtjs/moment",
-      "nuxt-windicss",
-      "@nuxtjs/color-mode",
-      "@nuxt/image",
-      /* Additional types */
-      "@types/prismjs"
+
     ],
     "typeRoots": ["./@types", "./node_modules/@types"],
   },

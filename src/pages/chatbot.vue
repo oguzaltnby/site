@@ -1,103 +1,74 @@
 <template>
-  <section class="chatbot">
-    <div class="messages">
-      <div v-for="(msg, i) in messages" :key="i" class="message">
-        <strong>{{ msg.role === 'user' ? 'Sen' : 'Bot' }}:</strong> {{ msg.content }}
+  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-2xl p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
+      <div v-for="(message, index) in messages" :key="index" class="mb-4">
+        <div :class="message.sender === 'user' ? 'text-right' : 'text-left'">
+          <div
+            :class="[
+              'inline-block',
+              'px-4',
+              'py-2',
+              'rounded-xl',
+              message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+            ]"
+          >
+            {{ message.text }}
+          </div>
+        </div>
       </div>
+      <form @submit.prevent="sendMessage" class="mt-4 flex">
+        <input
+          v-model="input"
+          type="text"
+          placeholder="Mesajınızı yazın..."
+          class="flex-1 px-4 py-2 border rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        />
+        <button
+          type="submit"
+          class="px-6 py-2 bg-blue-600 text-white rounded-r-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Gönder
+        </button>
+      </form>
     </div>
-    <form @submit.prevent="sendMessage" class="form">
-      <input
-        v-model="input"
-        type="text"
-        placeholder="Mesajını yaz..."
-        class="input"
-        :disabled="loading"
-      />
-      <button type="submit" class="button" :disabled="loading">
-        {{ loading ? 'Gönderiliyor...' : 'Gönder' }}
-      </button>
-    </form>
-  </section>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ofetch } from 'ofetch'
 
-const $fetch = ofetch
-
+// Klasik fetch kullanıyorum, ofetch yok
+const messages = ref([
+  { sender: 'bot', text: 'Merhaba! Size nasıl yardımcı olabilirim?' }
+])
 const input = ref('')
-const messages = ref<{ role: 'user' | 'assistant'; content: string }[]>([])
-const loading = ref(false)
 
 const sendMessage = async () => {
-  const text = input.value.trim()
-  if (!text || loading.value) return
+  if (!input.value.trim()) return
 
-  messages.value.push({ role: 'user', content: text })
+  messages.value.push({ sender: 'user', text: input.value })
+
+  const userMessage = input.value
   input.value = ''
-  loading.value = true
 
   try {
-    const response = await $fetch('/api/chat', {
+    const response = await fetch('/api/chat', {
       method: 'POST',
-      body: { messages: messages.value },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: userMessage }),
     })
 
-    messages.value.push({
-      role: 'assistant',
-      content: response.text || '🤖 Boş bir yanıt geldi.',
-    })
-  } catch (error: any) {
-    messages.value.push({
-      role: 'assistant',
-      content: '❌ Bir hata oluştu. Lütfen tekrar deneyin.',
-    })
-    console.error('API Hatası:', error)
-  } finally {
-    loading.value = false
+    const data = await response.json()
+
+    messages.value.push({ sender: 'bot', text: data.reply })
+  } catch (error) {
+    messages.value.push({ sender: 'bot', text: 'Bir hata oluştu. Lütfen tekrar deneyin.' })
   }
 }
 </script>
 
 <style scoped>
-.chatbot {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-.messages {
-  background: #1e1e1e;
-  color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  max-height: 400px;
-  overflow-y: auto;
-}
-.message {
-  margin-bottom: 0.5rem;
-}
-.form {
-  display: flex;
-}
-.input {
-  flex: 1;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
-}
-.button {
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #10b981;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.button:disabled {
-  background: #6b7280;
-  cursor: not-allowed;
-}
+/* İstersen buraya ekstra stiller ekleyebilirsin */
 </style>
