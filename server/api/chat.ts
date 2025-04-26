@@ -25,3 +25,4 @@ export default defineEventHandler(async (event) => {
     text: data.choices[0].message.content
   };
 });
+

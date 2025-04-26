@@ -8,7 +8,7 @@ import sitemap from "./modules/sitemap"
 import webfontloader from "./modules/webfontloader"
 
 const Modules: NuxtOptionsModule[] = [
-  "@nuxtjs/axios",
+  // "@nuxtjs/axios",
   "@nuxtjs/robots",
   ["@nuxtjs/pwa", pwa],
   ["@nuxt/content", content],
