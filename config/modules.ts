@@ -9,7 +9,7 @@ import webfontloader from "./modules/webfontloader"
 
 const Modules: NuxtOptionsModule[] = [
   // "@nuxtjs/axios",
-  "@nuxtjs/robots",
+  // "@nuxtjs/robots",
   ["@nuxtjs/pwa", pwa],
   ["@nuxt/content", content],
   ["@nuxtjs/feed", feed],
