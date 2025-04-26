@@ -46,7 +46,7 @@ const Config: NuxtConfig = {
   css,
   modules: [
     "@nuxt/content",
-    ...modules,
+    // ...modules,
     "@nuxtjs/feed"
   ],
   feed,
