@@ -49,7 +49,18 @@ const Config: NuxtConfig = {
     // ...modules,
     "@nuxtjs/feed"
   ],
-  feed,
+  content: {
+    markdown: {
+      prism: {
+        theme: false,
+        darkTheme: false
+      }
+    },
+    highlight: {
+      theme: false,
+      preload: ["vue", "html", "css", "js"]
+    }
+  },
   plugins,
   publicRuntimeConfig,
 
