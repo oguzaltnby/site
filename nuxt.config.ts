@@ -50,10 +50,7 @@ const Config: NuxtConfig = {
 
   ],
   content: {
-    documentDriven: true,  // veya ne kullanıyorsan
-    experimental: {
-      localMode: true
-    }
+    driver: 'fs'
   },
   plugins,
   publicRuntimeConfig,
