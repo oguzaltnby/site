@@ -2,6 +2,8 @@
   functions = "netlify/functions"
   publish = "dist"
   node_version = "18.12.0"  # Node.js sürümünü güncelleyin
+    NITRO_PRESET = "netlify"
+  NUXT_CONTENT_STORAGE = "filesystem"
 
 [dev]
   command = "npm run dev"
