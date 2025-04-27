@@ -17,7 +17,7 @@
       "#imports": [".nuxt/imports.d.ts"]
     },
     "types": [
-
+"node"
     ],
     "typeRoots": ["./@types", "./node_modules/@types"],
   },

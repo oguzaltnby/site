@@ -79,6 +79,7 @@
     "@nuxtjs/color-mode": "2.1.1",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/moment": "^1.6.1",
+    "@types/node": "^22.15.2",
     "@types/react": "^18.3.5",
     "@types/sharp": "^0.31.1",
     "@types/spotify-web-api-node": "^5.0.11",
