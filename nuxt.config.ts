@@ -47,7 +47,7 @@ const Config: NuxtConfig = {
 
   modules: [
     "@nuxt/content",
-    "@nuxt/image",
+    "@nuxt/image-edge",
     // ...modules,
     ...(process.env.NODE_ENV === "production" ? [] : ["better-sqlite3"]),
 
