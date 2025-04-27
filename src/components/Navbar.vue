@@ -26,7 +26,7 @@ export default Vue.extend({
     <div class="container mx-auto w-11/12 relative sm:w-9/12 md:w-7/12">
       <div class="flex items-center gap-6 justify-between">
         <SmartLink :href="getTargetLink" class="flex-shrink-0 h-10 w-10 flex items-center space-x-4">
-          <img src="/assets/icons/icon.ico"
+          <img src="@/assets/icons/icon.ico"
             class="rounded-md bg-gray-100 ring-black transition-transform ring-2 ring-opacity-5 sm:transform hover:-rotate-6 flex-shrink-0 h-10 w-10">
 
           <Transition name="fade" mode="out-in">
