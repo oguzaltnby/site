@@ -60,7 +60,11 @@ const Config: NuxtConfig = {
 
   vite: {
     ...viteOptions,
-
+    build: {
+      rollupOptions: {
+        external: ["axios"], // Axios'u harici olarak işaretle
+      },
+    },
   }
 }
 
