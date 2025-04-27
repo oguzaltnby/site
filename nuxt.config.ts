@@ -63,7 +63,7 @@ const Config: NuxtConfig = {
     ...viteOptions,
     build: {
       rollupOptions: {
-        external: ["axios"], // Axios'u harici olarak işaretle
+        external: ["axios", 'src/static/assets/icons/memoji.png'], // Axios'u harici olarak işaretle
       },
     },
   }
