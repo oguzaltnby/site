@@ -49,18 +49,7 @@ const Config: NuxtConfig = {
     // ...modules,
 
   ],
-  content: {
-    markdown: {
-      prism: {
-        theme: false,
-        darkTheme: false
-      }
-    },
-    highlight: {
-      theme: false,
-      preload: ["vue", "html", "css", "js"]
-    }
-  },
+
   plugins,
   publicRuntimeConfig,
 
