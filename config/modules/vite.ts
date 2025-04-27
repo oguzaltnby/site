@@ -1,5 +1,6 @@
 export default {
-  experimentWarning: false,
-  build: false,
-  ssr: false,
-}
+  experimentWarning: false, // Deneysel uyarıları devre dışı bırakır
+  optimizeDeps: {
+    include: ["ofetch"], // Optimize edilmesi gereken bağımlılıklar
+  },
+};

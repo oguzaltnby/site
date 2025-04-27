@@ -58,9 +58,7 @@ const Config: NuxtConfig = {
 
   vite: {
     ...viteOptions,
-    optimizeDeps: {
-      include: ["ofetch"]
-    }
+
   }
 }
 
