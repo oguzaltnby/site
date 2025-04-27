@@ -59,6 +59,7 @@ const Config: NuxtConfig = {
   publicRuntimeConfig,
 
   vite: {
+    publicDir: "src/assets",
     ...viteOptions,
     build: {
       rollupOptions: {
