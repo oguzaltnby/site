@@ -1,1 +1,1 @@
-export default ["@/stylesheets/root"]
+export default ["@/src/stylesheets/root.css"]
