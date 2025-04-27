@@ -49,7 +49,12 @@ const Config: NuxtConfig = {
     // ...modules,
 
   ],
-
+  content: {
+    documentDriven: true,  // veya ne kullanıyorsan
+    experimental: {
+      localMode: true
+    }
+  },
   plugins,
   publicRuntimeConfig,
 
