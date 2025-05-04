@@ -1,8 +1,8 @@
 [build]
   functions = "netlify/functions"
   publish = "dist"
-  node_version = "18.17.0"  # Node.js sürümünü güncelleyin
-  command = "npm install --omit=optional && nuxt generate"
+  node_version = "18.20.5"  # Node.js sürümünü güncelleyin
+command = "rm -rf node_modules package-lock.json && npm install --omit=optional && nuxt generate"
 
 [dev]
   command = "npm run dev"
