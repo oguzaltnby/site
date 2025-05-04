@@ -1,12 +1,16 @@
 [build]
-  functions = "netlify/functions"
   publish = "dist"
-  node_version = "18.20.5"  # Node.js sürümünü güncelleyin
-command = "rm -rf node_modules package-lock.json && npm install --omit=optional && nuxt generate"
+  functions = "netlify/functions"
+  command = "rm -rf node_modules package-lock.json && npm install --omit=optional && npx nuxt generate"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [dev]
   command = "npm run dev"
   port = 3000
+  targetPort = 3000
+  framework = "nuxt"
 
 [functions]
   included_files = ["netlify/functions/files/**"]
