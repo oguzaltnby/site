@@ -56,6 +56,7 @@ const Config: NuxtConfig = {
     driver: 'fs'
   },
   plugins,
+
   publicRuntimeConfig,
 
   vite: {

@@ -1,63 +1,45 @@
-import type { Plugin } from "@nuxt/types"
-import type { Timestamp } from "firebase/firestore"
+// plugins/firebase.ts
+import { initializeApp } from 'firebase/app'
+import { getFirestore, collection, query, where, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore'
+import type { Song } from '~/types/song'
 
-/* Interfaces */
-export interface SongMetadata {
-  artist?: string | null
-  thumbnail?: string | null
-  title?: string | null
+const firebaseConfig = {
+  apiKey: 'API_KEY',
+  authDomain: 'xxx.firebaseapp.com',
+  projectId: 'xxx',
+  storageBucket: 'xxx.appspot.com',
+  messagingSenderId: 'xxx',
+  appId: 'xxx'
 }
 
-export interface Song {
-  date: any
-  url: string | null
-  spotifyUrl?: string | null
-  metadata: SongMetadata
-}
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
 
-/* Declare modules */
+export default defineNuxtPlugin((nuxtApp) => {
+  async function getDaily(getTurkeyTime: () => Date, limitNum: number = 1): Promise<Song | Song[]> {
+    const q = query(
+      collection(db, 'dailySongs'),
+      where('date', '<=', getTurkeyTime()),
+      orderBy('date', 'desc'),
+      limit(limitNum)
+    )
 
-/* Plugin */
-const Firebase: Plugin = ({ $fire, $getTurkeyTime }, inject) => {
-  /**
-   * Fetch the daily song from Firebase.
-   * @param {number} [limit=1] The limit of the values to return. If none present, will return one URL in string format.
-   * @returns {string|any[]} Either array of the songs or the URL of a song if no limit is given.
-   */
-  async function getDaily(limit: number = 1): Promise<Song | Song[]> {
-    const ref = $fire.firestore.collection("dailySongs")
-
+    const snapshots = await getDocs(q)
     const docs: Song[] = []
 
-    await ref
-      .where("date", "<=", $getTurkeyTime())
-      .orderBy("date", "desc")
-      .limit(limit)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((snapshot) => {
-          const {
-            date: sDate,
-            url,
-            metadata,
-            spotifyUrl,
-          } = snapshot.data() as Song
+    snapshots.forEach((doc) => {
+      const { date, url, metadata, spotifyUrl } = doc.data() as any
 
-          docs.push({
-            date: (sDate as Timestamp).toDate(),
-            url,
-            metadata,
-            spotifyUrl,
-          })
-        })
+      docs.push({
+        date: (date as Timestamp).toDate(),
+        url,
+        metadata,
+        spotifyUrl,
       })
+    })
 
-    if (docs.length === 1) return docs[0]
-    else if (docs.length > 1) return docs
-    else return []
+    return docs.length === 1 ? docs[0] : docs
   }
 
-  inject("getDaily", getDaily)
-}
-
-export default Firebase
+  nuxtApp.provide('getDaily', getDaily)
+})
