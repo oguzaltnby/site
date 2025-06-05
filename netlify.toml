@@ -1,7 +1,7 @@
 [build]
   publish = "dist"
   functions = "netlify/functions"
-  command = "rm -rf node_modules package-lock.json && npm install --omit=optional && npx nuxt generate"
+  command = "NODE_ENV=production npx nuxt generate"
 
 [build.environment]
   NODE_VERSION = "18"
