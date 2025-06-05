@@ -46,15 +46,12 @@ const Config: NuxtConfig = {
   css,
 
   modules: [
-    "@nuxt/content",
     "@nuxt/image-edge",
     // ...modules,
     ...(process.env.NODE_ENV === "production" ? [] : ["better-sqlite3"]),
 
   ],
-  content: {
-    driver: 'fs'
-  },
+
   plugins,
 
   publicRuntimeConfig,
