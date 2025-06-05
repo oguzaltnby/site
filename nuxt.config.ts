@@ -53,7 +53,7 @@ const Config: NuxtConfig = {
 
   ],
   content: {
-    driver: 'fs'
+    documentDriven: true
   },
   plugins,
 
