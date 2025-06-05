@@ -4,7 +4,9 @@
   command = "NODE_ENV=production npx nuxt generate"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_OPTIONS = "--openssl-legacy-provider"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 
 [dev]
   command = "npm run dev"

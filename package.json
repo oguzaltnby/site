@@ -35,7 +35,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@eggsydev/vue-lanyard": "^1.1.3",
