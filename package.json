@@ -50,6 +50,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "@types/prismjs": "^1.26.4",
     "@vue/runtime-dom": "^3.5.3",
+    "better-sqlite3": "^11.10.0",
     "core-js": "^3.38.1",
     "firebase": "^11.9.0",
     "lastfm-typed": "^2.1.0",
