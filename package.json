@@ -63,7 +63,7 @@
     "prismjs": "^1.29.0",
     "sass": "^1.78.0",
     "spotify-web-api-node": "^5.0.2",
-    "vue": "2.7.16",
+    "vue": "^3.5.16",
     "vue-cmd-menu": "^0.1.9",
     "vue-disqus": "^4.0.1",
     "vue-server-renderer": "2.7.16",
