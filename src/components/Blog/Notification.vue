@@ -1,27 +1,30 @@
-<script lang="ts">
-import Vue from "vue"
+<script lang="ts" setup>
+import { computed, defineProps, useSlots } from 'vue'
 
-export default Vue.extend({
-  props: {
-    type: {
-      type: String,
-      required: false,
-      default: "information",
-    },
-    title: {
-      type: String,
-      required: false,
-      default: "",
-    },
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'information',
   },
-  computed: {
-    getIcon() {
-      if (this.type === "warning") return "❗️"
-      else if (this.type === "danger") return "🚨"
-      else if (this.type === "success") return "✅"
-      else return "💡"
-    },
+  title: {
+    type: String,
+    default: '',
   },
+})
+
+const slots = useSlots()
+
+const getIcon = computed(() => {
+  switch (props.type) {
+    case 'warning':
+      return '❗️'
+    case 'danger':
+      return '🚨'
+    case 'success':
+      return '✅'
+    default:
+      return '💡'
+  }
 })
 </script>
 
@@ -35,7 +38,7 @@ export default Vue.extend({
     <div>
       <h1 v-if="title">{{ title }}</h1>
 
-      <p v-if="!!$slots.default">
+      <p v-if="slots.default">
         <slot />
       </p>
     </div>
