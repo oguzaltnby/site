@@ -1,0 +1,12 @@
+html,
+body {
+  scroll-behavior: smooth;
+  scroll-padding: 16px;
+  scrollbar-gutter: stable;
+}
+
+@media screen and (max-width: 1024px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}/*# sourceMappingURL=body.css.map */

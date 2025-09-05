@@ -1,0 +1,203 @@
+html,
+body {
+  scroll-behavior: smooth;
+  scroll-padding: 16px;
+  scrollbar-gutter: stable;
+}
+
+@media screen and (max-width: 1024px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+/* Tailwind Colors */
+/* Scrollbar mixin */
+/* Use the mixin on HTML */
+html {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+html ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 8px;
+  height: 8px;
+}
+html ::-webkit-scrollbar-thumb {
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+html ::-webkit-scrollbar-track {
+  /* @apply bg-gray-200; */
+  background-color: rgb(229, 231, 235);
+}
+html.dark {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+html.dark ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 8px;
+  height: 8px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+html.dark ::-webkit-scrollbar-track {
+  /* @apply bg-neutral-800; */
+  background-color: #262626;
+}
+
+/* Create a class for other elements */
+.scrollbar {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+}
+.scrollbar ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 6px;
+  height: 6px;
+}
+.scrollbar ::-webkit-scrollbar-thumb {
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+.scrollbar ::-webkit-scrollbar-track {
+  /* @apply bg-gray-200; */
+  background-color: rgb(229, 231, 235);
+}
+
+.dark .scrollbar {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+}
+.dark .scrollbar ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 6px;
+  height: 6px;
+}
+.dark .scrollbar ::-webkit-scrollbar-thumb {
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+.dark .scrollbar ::-webkit-scrollbar-track {
+  /* @apply bg-neutral-800; */
+  background-color: #262626;
+}
+
+/* Page and layout enter/leave transition */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Fade transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Slide transition */
+.slide-enter-active,
+.slide-leave-enter {
+  transform: translateY(0);
+  transition: all 0.3s linear;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(100%);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-enter {
+  transform: translateX(0);
+  transition: transform 0.2s;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+  transform: translateX(100%);
+  transition: transform 0.2s;
+}
+
+/* Modules */
+/**
+  Vue Tippy Discord-like design.
+  Author: Voknehzyr (@voknehzyr)
+*/
+.tippy-tooltip.discord-theme {
+  background-color: black;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.5);
+}
+
+.tippy-tooltip[data-inertia][data-state=visible] {
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tippy-popper[x-placement^=top] .tippy-tooltip[data-animation=discord-anim] {
+  transform-origin: center !important;
+}
+.tippy-popper[x-placement^=top] .tippy-tooltip[data-animation=discord-anim][data-state=hidden] {
+  opacity: 0;
+  transform: scale(0.9) translateY(-11px);
+}
+.tippy-popper[x-placement^=top] .tippy-tooltip[data-animation=discord-anim][data-state=visible] {
+  transform: scale(1) translateY(-11px);
+}
+
+.tippy-popper[x-placement^=bottom] .tippy-tooltip[data-animation=discord-anim][data-state=hidden] {
+  opacity: 0;
+  transform: scale(0.9) translateY(11px);
+}
+.tippy-popper[x-placement^=bottom] .tippy-tooltip[data-animation=discord-anim][data-state=visible] {
+  transform: scale(1) translateY(11px);
+}
+
+.tippy-popper[x-placement^=top] .tippy-tooltip.discord-theme .tippy-arrow {
+  border-top-color: black;
+  filter: drop-shadow(0 2px 16px 0 rgba(0, 0, 0, 0.5));
+}
+
+.tippy-popper[x-placement^=bottom] .tippy-tooltip.discord-theme .tippy-arrow {
+  border-bottom-color: black;
+  filter: drop-shadow(0 2px 16px 0 rgba(0, 0, 0, 0.5));
+}
+
+.tippy-tooltip.discord-theme .tippy-content {
+  font-family: "Inter", sans-serif;
+  padding: 1.5px 4px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  font-size: 0.965em;
+}
+
+/* Tailwind Colors */
+#disqus_thread a {
+  color: rgb(17, 24, 39);
+}
+#disqus_thread a:hover {
+  color: rgb(55, 65, 81);
+}
+
+.dark #disqus_thread a {
+  color: rgb(243, 244, 246);
+}
+.dark #disqus_thread a:hover {
+  color: rgb(229, 231, 235);
+}/*# sourceMappingURL=root.css.map */

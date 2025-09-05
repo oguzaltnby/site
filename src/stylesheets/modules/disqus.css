@@ -1,0 +1,14 @@
+/* Tailwind Colors */
+#disqus_thread a {
+  color: rgb(17, 24, 39);
+}
+#disqus_thread a:hover {
+  color: rgb(55, 65, 81);
+}
+
+.dark #disqus_thread a {
+  color: rgb(243, 244, 246);
+}
+.dark #disqus_thread a:hover {
+  color: rgb(229, 231, 235);
+}/*# sourceMappingURL=disqus.css.map */

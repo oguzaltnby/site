@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>Oguzhan's Blog</ShortName>
+    <Description>Oguzhan'ın Blog'unda ara!</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image style="z-index: 9999;" height="16" width="16" type="image/x-icon">/assets/icons/logo.png</Image>
+    <Url type="text/html" method="get" template="https://localhost:3000/blog/?q={searchTerms}" />
+</OpenSearchDescription>

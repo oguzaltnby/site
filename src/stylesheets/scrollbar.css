@@ -1,0 +1,78 @@
+/* Tailwind Colors */
+/* Scrollbar mixin */
+/* Use the mixin on HTML */
+html {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+html ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 8px;
+  height: 8px;
+}
+html ::-webkit-scrollbar-thumb {
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+html ::-webkit-scrollbar-track {
+  /* @apply bg-gray-200; */
+  background-color: rgb(229, 231, 235);
+}
+html.dark {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+html.dark ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 8px;
+  height: 8px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+html.dark ::-webkit-scrollbar-track {
+  /* @apply bg-neutral-800; */
+  background-color: #262626;
+}
+
+/* Create a class for other elements */
+.scrollbar {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+}
+.scrollbar ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 6px;
+  height: 6px;
+}
+.scrollbar ::-webkit-scrollbar-thumb {
+  /* @apply bg-gray-300; */
+  background-color: rgb(209, 213, 219);
+}
+.scrollbar ::-webkit-scrollbar-track {
+  /* @apply bg-gray-200; */
+  background-color: rgb(229, 231, 235);
+}
+
+.dark .scrollbar {
+  scrollbar-width: thin;
+  /* Don't set background to elements */
+}
+.dark .scrollbar ::-webkit-scrollbar {
+  /* Apply thinner scrollbar for elements */
+  width: 6px;
+  height: 6px;
+}
+.dark .scrollbar ::-webkit-scrollbar-thumb {
+  /* @apply bg-neutral-700; */
+  background-color: #404040;
+}
+.dark .scrollbar ::-webkit-scrollbar-track {
+  /* @apply bg-neutral-800; */
+  background-color: #262626;
+}/*# sourceMappingURL=scrollbar.css.map */
