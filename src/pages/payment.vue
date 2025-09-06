@@ -25,7 +25,7 @@ export default Vue.extend({
         },
         {
           image: "/assets/icons/isbankasi.png",
-          name: "İş Bankasıı",
+          name: "İş Bankası",
           iban: "TR33 0006 4000 0011 2430 3857 28",
           revealed: false,
         },
