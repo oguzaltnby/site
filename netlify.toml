@@ -1,9 +1,9 @@
 [build]
-  command = "pnpm run build"
+  command = "corepack disable && npm i -g pnpm@10.13.1 && pnpm install && pnpm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "20.18.1"
 
 [dev]
   command = "pnpm run dev"
