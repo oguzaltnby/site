@@ -1,19 +1,16 @@
-import type { Plugin } from "@nuxt/types"
+// Nuxt 3 plugin
+import { defineNuxtPlugin } from '#app'
 
-/* Import plugins */
-import getReadableDate from "./Utils/getReadableDate"
-import getReadingTime from "./Utils/getReadingTime"
-import getTurkeyTime from "./Utils/getTurkeyTime"
-import prepareMeta from "./Utils/prepareMeta"
-import applyMediumZoom from "./Utils/applyMediumZoom"
+import getReadableDate from './Utils/getReadableDate'
+import getReadingTime from './Utils/getReadingTime'
+import getTurkeyTime from './Utils/getTurkeyTime'
+import prepareMeta from './Utils/prepareMeta'
+import applyMediumZoom from './Utils/applyMediumZoom'
 
-/* Export and inject plugin */
-const Util: Plugin = (_, inject) => {
-  inject("getReadableDate", getReadableDate)
-  inject("getReadingTime", getReadingTime)
-  inject("getTurkeyTime", getTurkeyTime)
-  inject("prepareMeta", prepareMeta)
-  inject("applyMediumZoom", applyMediumZoom)
-}
-
-export default Util
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.provide('getReadableDate', getReadableDate)
+  nuxtApp.provide('getReadingTime', getReadingTime)
+  nuxtApp.provide('getTurkeyTime', getTurkeyTime)
+  nuxtApp.provide('prepareMeta', prepareMeta)
+  nuxtApp.provide('applyMediumZoom', applyMediumZoom)
+})
