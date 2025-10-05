@@ -90,7 +90,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import draggable from "vuedraggable";
+import { VueDraggableNext as draggable } from 'vue-draggable-next';
 
 export default Vue.extend({
   components: {
