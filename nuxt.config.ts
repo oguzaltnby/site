@@ -1,69 +1,50 @@
-// Types
-import type { NuxtConfig } from "@nuxt/types"
+// nuxt.config.ts
+export default defineNuxtConfig({
+  // Kaynak dizini
+  srcDir: 'src',
+  // SSR açık (SSG de desteklenir: nuxi generate)
+  ssr: true,
 
-// Base config
-import buildModules from "./config/buildModules"
-import components from "./config/components"
-import generate from "./config/generate"
-import css from "./config/css"
-import head from "./config/head"
-import loading from "./config/loading"
-import modules from "./config/modules"
-import plugins from "./config/plugins"
-import publicRuntimeConfig from "./config/publicRuntimeConfig"
-
-// Specific module options
-import viteOptions from "./config/modules/vite"
-import feed from "./config/modules/feed"
-
-// Constants
-const isDev = process.env.NODE_ENV === "development"
-
-const Config: NuxtConfig = {
-  rootDir: "./",
-  srcDir: "src",
-  target: "static",
-  ssr: !isDev,
-
+  // Runtime config
   runtimeConfig: {
     openaiApiKey: process.env.OPENAI_API_KEY,
     public: {}
   },
 
-  hooks: {
-    generate: {
-      fallback: true,
-      interval: 2000,
-      concurrency: 1,
-    },
+  // Nuxt 3 modülleri
+  modules: [
+    '@nuxt/image',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
+    '@vite-pwa/nuxt'
+  ],
+
+  // Netlify için uygun Nitro preset
+  nitro: {
+    preset: 'netlify'
   },
 
-  head,
-  loading,
-  buildModules,
-  components,
-  generate,
-  css,
+  // Vite: publicDir KULLANMA — Nuxt'ta dir.public kullanılır
+  dir: {
+    public: 'public' // public/ altındaki dosyalar kökten servis edilir
+  },
 
-  modules: [
-    "@nuxt/image-edge",
-    // ...modules,
-    ...(process.env.NODE_ENV === "production" ? [] : ["better-sqlite3"]),
-
-  ],
-  plugins,
-
-  publicRuntimeConfig,
-
+  // Vite derleme ayarları (mevcut dışlamayı korudum)
   vite: {
-    publicDir: "src/assets",
-    ...viteOptions,
     build: {
       rollupOptions: {
-        external: ["axios", 'src/static/assets/icons/memoji.png'], // Axios'u harici olarak işaretle
-      },
-    },
-  }
-}
+        external: ['axios', 'src/static/assets/icons/memoji.png']
+      }
+    }
+  },
 
-export default Config
+  // Opsiyonel örnek ayarlar (gerekirse doldur)
+  // image: { },
+  robots: {
+    // basit bir allow-all
+    rules: [{ userAgent: '*', allow: '/' }]
+  },
+  sitemap: {
+    siteUrl: 'https://oguzaltnby.com'
+  }
+})
