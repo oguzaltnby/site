@@ -1,5 +1,7 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
+
+
 
 /* Interfaces */
 interface Platform {
@@ -13,7 +15,7 @@ interface Status {
   classes?: string
 }
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     rating: {
       type: [String, Number],

@@ -1,10 +1,10 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 // Import type
 import type { Repository } from "~/src/types/Response/GitHub"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       repos: [] as Repository[],

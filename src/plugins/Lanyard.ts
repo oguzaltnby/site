@@ -1,4 +1,6 @@
-import Vue from "vue"
-import VueLanyard from "@eggsydev/vue-lanyard"
+import { defineNuxtPlugin } from '#app'
+import VueLanyard from '@eggsydev/vue-lanyard'
 
-Vue.use(VueLanyard)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(VueLanyard)
+})

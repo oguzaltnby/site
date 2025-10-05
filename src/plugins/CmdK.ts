@@ -1,4 +1,6 @@
-import Vue from "vue"
-import CommandMenu from "vue-cmd-menu"
+import CommandMenu from 'vue-cmd-menu'
+import { defineNuxtPlugin } from '#app'
 
-Vue.component("CommandMenu", CommandMenu)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.component('CommandMenu', CommandMenu)
+})

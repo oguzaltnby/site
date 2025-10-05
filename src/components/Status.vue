@@ -1,5 +1,7 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
+
+
 
 /* Import types */
 import type {
@@ -7,7 +9,7 @@ import type {
   Activity,
 } from "@eggsydev/vue-lanyard/@types/lanyard"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       finished: false,

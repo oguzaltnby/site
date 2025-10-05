@@ -1,11 +1,12 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
+
 
 /* Interfaces */
 import type { Post } from "@/types/Post"
 import type { FetchReturn } from "@nuxt/content/types/query-builder"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       formatter: new Intl.DateTimeFormat("tr-TR", {

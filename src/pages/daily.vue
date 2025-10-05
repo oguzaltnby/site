@@ -1,11 +1,12 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
+
 import SpotifyWebApi from 'spotify-web-api-node'
 
 /* Import types */
 import type { Song, SongMetadata } from "../plugins/Firebase"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     const selected: Song = {
       date: null,

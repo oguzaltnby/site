@@ -1,7 +1,7 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
-export default Vue.extend({
+export default defineComponent({
   computed: {
     getRandomItem(): string {
       return ["w-2/3", "w-3/4", "w-2/5"][Math.floor(Math.random() * 3)]

@@ -1,10 +1,10 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 // Types
 import type { Sponsor } from "~/src/types/Response/Sponsors"
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     sponsor: {
       type: Object as () => Sponsor,

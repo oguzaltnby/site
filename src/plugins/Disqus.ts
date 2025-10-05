@@ -1,6 +1,8 @@
-import Vue from "vue"
-import VueDisqus from "vue-disqus"
+import { defineNuxtPlugin } from '#app'
+import VueDisqus from 'vue3-disqus'
 
-Vue.use(VueDisqus, {
-  shortname: "oguzaltnby",
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(VueDisqus, {
+    shortname: 'oguzaltnby',
+  })
 })

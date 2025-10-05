@@ -89,10 +89,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from 'vue'
+
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     draggable,
   },

@@ -1,15 +1,20 @@
-// @ts-nocheck
-import Vue from "vue"
-import VueTippy, { TippyComponent } from "vue-tippy/dist/vue-tippy.esm"
+import { defineNuxtPlugin } from '#app'
+import { TippyPlugin } from 'vue-tippy'
 
-Vue.component("Tippy", TippyComponent)
+import 'tippy.js/dist/tippy.css'
+import 'tippy.js/animations/shift-away.css'
 
-Vue.use(VueTippy, {
-  animation: "discord-anim",
-  duration: [100, 100],
-  hideOnClick: false,
-  directive: "tippy",
-  theme: "discord",
-  inertia: true,
-  arrow: true,
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(TippyPlugin, {
+    directive: 'tippy',
+    component: 'Tippy',
+    defaultProps: {
+      animation: 'shift-away',
+      duration: [100, 100],
+      hideOnClick: false,
+      theme: 'discord',
+      inertia: true,
+      arrow: true,
+    },
+  })
 })

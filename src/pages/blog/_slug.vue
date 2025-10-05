@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 /* Interfaces */
 import type { Post } from "~/src/types/Post"
@@ -9,7 +9,7 @@ interface RelatedPost {
   slug: string
 }
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       post: {} as Post,

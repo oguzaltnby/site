@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 /* Import third-party modules */
 import { highlight, languages } from "prismjs"
@@ -14,7 +14,7 @@ interface Metadata {
   result: PresenceMetadata
 }
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     const initialService = {
       author: {

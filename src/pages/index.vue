@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 /* Interfaces */
 import type { Repository } from "../types/Response/GitHub"
@@ -25,7 +25,7 @@ interface ExperienceObject {
   education: Experience[]
 }
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       showModal: false,

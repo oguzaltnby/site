@@ -1,11 +1,11 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 // Types
 import type { Post } from "~/src/types/Post"
 import type { FetchReturn } from "@nuxt/content/types/query-builder"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       posts: [] as (Post[] & FetchReturn) | (Post[] & FetchReturn)[],

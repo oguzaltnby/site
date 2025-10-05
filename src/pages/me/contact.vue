@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 // Interface
 interface Link {
@@ -9,7 +9,7 @@ interface Link {
   icon: string
 }
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       pageLoaded: false,

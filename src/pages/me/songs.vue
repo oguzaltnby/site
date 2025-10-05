@@ -1,5 +1,5 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 import axios from "axios"
 
 /* Interfaces */
@@ -30,7 +30,7 @@ interface SpotifyUser {
   followers: { total: number };
 }
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       spotifyData: [] as SpotifyTrack[], // En çok dinlenen şarkı bilgilerini tutacak

@@ -1,11 +1,11 @@
 <script lang="ts">
-import Vue from "vue"
+import { defineComponent } from 'vue'
 
 /* Interfaces */
 import type { SponsorLinks } from "~/@types/runtimeConfig"
 import type { ISponsor } from "@/types/Response/Sponsors"
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       sponsors: [] as ISponsor[],
